@@ -1,0 +1,18 @@
+---
+extends:
+  - airbnb
+  - prettier
+parser: babel-eslint
+plugins:
+  - prettier
+env:
+  es6: true
+  node: true
+  browser: true
+  jest: true
+globals:
+  mount: true
+  shallow: true
+  ruleHelpers: true
+rules:
+  prettier/prettier: error

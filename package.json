@@ -1,0 +1,39 @@
+{
+  "name": "mutt",
+  "version": "0.0.1",
+  "description": "A composable immutable library",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist 2> /dev/null || true && mkdir dist && echo 'Compiling!' && babel --copy-files --quiet --out-dir dist src",
+    "lint": "./node_modules/eslint/bin/eslint.js ./src -f stylish --ext .js && npm run test",
+    "lint:fix": "prettier --write \"./src/**/*.js\"",
+    "test": "jest",
+    "test:watch": "jest --watch --verbose"
+  },
+  "author": "Daniel St. Clair",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "7.4.4",
+    "@babel/polyfill": "7.4.4",
+    "@babel/preset-env": "7.4.4",
+    "@babel/preset-flow": "7.0.0",
+    "@types/jest": "24.0.18",
+    "babel-eslint": "10.0.2",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-import-resolver-webpack": "0.11.0",
+    "eslint-plugin-flowtype": "3.4.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "8.0.1",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "24.9.0",
+    "prettier": "1.18.2"
+  }
+}
