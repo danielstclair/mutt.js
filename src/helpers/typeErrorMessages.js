@@ -1,8 +1,9 @@
 const { getType } = require('./getType');
+const { isFunction } = require('./isFunction');
+const { typeEnum } = require('./assertType');
 
 const yieldError = (message, shouldThrow) => (...args) => {
-  const messageToYield =
-    getType(message) === 'function' ? message(...args) : message;
+  const messageToYield = isFunction(message) ? message(...args) : message;
   if (shouldThrow) {
     throw new Error(messageToYield);
   }
@@ -16,12 +17,12 @@ const typeErrorMessage = (expectedType) => (param, value) => {
   )}`;
 };
 
-const stringMessage = typeErrorMessage('string');
-const objectMessage = typeErrorMessage('object');
-const arrayMessage = typeErrorMessage('array');
-const numberMessage = typeErrorMessage('number');
-const boolMessage = typeErrorMessage('boolean');
-const funcMessage = typeErrorMessage('function');
+const stringMessage = typeErrorMessage(typeEnum.string);
+const objectMessage = typeErrorMessage(typeEnum.object);
+const arrayMessage = typeErrorMessage(typeEnum.array);
+const numberMessage = typeErrorMessage(typeEnum.number);
+const boolMessage = typeErrorMessage(typeEnum.boolean);
+const funcMessage = typeErrorMessage(typeEnum.function);
 
 const stringLog = (param, value) => yieldError(stringMessage)(param, value);
 const objectLog = (param, value) => yieldError(objectMessage)(param, value);

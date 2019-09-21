@@ -2,13 +2,16 @@ const { getType } = require('./getType');
 const { createEnum } = require('../methods/enum');
 
 const typeEnum = createEnum({
-  object: 'object',
-  array: 'array',
-  number: 'number',
-  string: 'string',
-  boolean: 'boolean',
-  function: 'function',
-  null: 'null',
+  object: 'Object',
+  array: 'Array',
+  number: 'Number',
+  string: 'String',
+  boolean: 'Boolean',
+  function: 'Function',
+  null: 'Null',
+  regexp: 'RegExp',
+  async: 'Async',
+  promise: 'Promise',
 });
 
 const assertType = (value, expectedType) => {
@@ -16,4 +19,4 @@ const assertType = (value, expectedType) => {
   return getType(value) === expected;
 };
 
-module.exports = { assertType };
+module.exports = { assertType, typeEnum };

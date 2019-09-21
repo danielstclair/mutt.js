@@ -2,12 +2,12 @@ const { getType } = require('../../src/helpers/getType');
 
 describe('getType', () => {
   it('returns the type of the target', () => {
-    expect(getType([])).toBe('array');
-    expect(getType({})).toBe('object');
-    expect(getType(() => ({}))).toBe('function');
-    expect(getType(null)).toBe('null');
-    expect(getType(1)).toBe('number');
-    expect(getType('1')).toBe('string');
-    expect(getType(false)).toBe('boolean');
+    expect(getType([])).toBe('Array');
+    expect(getType({})).toBe('Object');
+    expect(getType(() => ({}))).toBe('Function');
+    expect(getType(null)).toBe('Null');
+    expect(getType(1)).toBe('Number');
+    expect(getType('1')).toBe('String');
+    expect(getType(false)).toBe('Boolean');
   });
 });
