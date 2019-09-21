@@ -1,9 +1,9 @@
-import { matchesSchema } from '../../src/methods/matchesSchema';
+import { matchesSchema } from '../../src/helpers/matchesSchema';
 
 describe('matchesSchema', () => {
   it('detects if an object matches the provided schema', () => {
     const schema = {
-      firstName: { _type: 'string' },
+      firstName: { _type: 'String' },
     };
     const target = {
       firstName: 'Daniel',
@@ -11,13 +11,13 @@ describe('matchesSchema', () => {
     const badTarget = {
       firstName: 1,
     };
-    const match = matchesSchema(target, schema);
-    const badMatch = matchesSchema(badTarget, schema);
+    const match = matchesSchema(schema)(target);
+    const badMatch = matchesSchema(schema)(badTarget);
     expect(match.success).toBeTruthy();
     expect(match.error).toBeNull();
     expect(badMatch.success).toBeFalsy();
     expect(badMatch.error).toBe(
-      'Error! Expected key "firstName" to be of type "string" but got type "number"',
+      'Error! Expected key "firstName" to be of type "String" but got type "Number"',
     );
   });
   it('deeply checks objects', () => {
@@ -35,8 +35,18 @@ describe('matchesSchema', () => {
         },
       },
     };
-    const match = matchesSchema(target, schema);
+    const match = matchesSchema(schema)(target);
     expect(match.success).toBeTruthy();
     expect(match.error).toBeNull();
+  });
+  it('accepts a typeKey for the user to use in their schema', () => {
+    const schema = {
+      name: { '*type': 'String' },
+    };
+    const target = {
+      name: 'Jim',
+    };
+    const match = matchesSchema(schema, '*type')(target);
+    expect(match.success).toBeTruthy();
   });
 });

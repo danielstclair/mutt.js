@@ -5,26 +5,26 @@ const {
 describe('matchTargetToSchema', () => {
   it('accepts a target and a schema and returns a new object with the shape of the schema', () => {
     const schema = {
-      firstName: { _type: 'string' },
+      firstName: { _type: 'String' },
     };
     const officeWorker = {
       firstName: 'jim',
       lastName: 'halpert',
     };
-    const newWorker = matchTargetToSchema(officeWorker, schema);
+    const newWorker = matchTargetToSchema(schema)(officeWorker);
     expect(newWorker.firstName).toBe('jim');
     expect(newWorker.lastName).toBeFalsy();
   });
   it('should handle deeply nested objects', () => {
     const schema = {
-      firstName: { _type: 'string' },
+      firstName: { _type: 'String' },
       _meta: {
         actor: {
-          name: { _type: 'string' },
-          currentRole: { _type: 'string' },
+          name: { _type: 'String' },
+          currentRole: { _type: 'String' },
         },
       },
-      hobbies: { _type: 'array' },
+      hobbies: { _type: 'Array' },
     };
     const officeWorker = {
       firstName: 'jim',
@@ -39,20 +39,22 @@ describe('matchTargetToSchema', () => {
         test: 1,
       },
     };
-    const newWorker = matchTargetToSchema(officeWorker, schema);
+    const newWorker = matchTargetToSchema(schema)(officeWorker);
     expect(newWorker.hobbies[0]).toBe('sports');
+    // eslint-disable-next-line
     expect(newWorker._meta.actor.name).toBe('John Krazinsky');
+    // eslint-disable-next-line
     expect(newWorker._meta.actor.spouse).toBeFalsy();
   });
   it('should throw an error if a type does not match', () => {
     const schema = {
-      id: { _type: 'string' },
+      id: { _type: 'String' },
     };
     const officeWorker = {
       id: 1,
     };
-    expect(() => matchTargetToSchema(officeWorker, schema)).toThrow(
-      'Error! Expected key "id" to be of type "string" but got type "number"',
+    expect(() => matchTargetToSchema(schema)(officeWorker)).toThrow(
+      'Error! Expected key "id" to be of type "String" but got type "Number"',
     );
   });
 });
