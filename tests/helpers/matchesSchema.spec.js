@@ -49,4 +49,11 @@ describe('matchesSchema', () => {
     const match = matchesSchema(schema, '*type')(target);
     expect(match.success).toBeTruthy();
   });
+  it('checks is schema and target share any keys', () => {
+    const schema = { firstName: { _type: 'string' } };
+    const target = { lastName: 'Schrute' };
+    const match = matchesSchema(schema)(target);
+    expect(match.success).toBeFalsy();
+    expect(match.error).toBe('No keys are shared.');
+  });
 });
