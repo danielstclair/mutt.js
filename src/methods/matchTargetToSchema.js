@@ -1,10 +1,10 @@
+const cloneDeep = require('lodash.clonedeep');
 const { matchesSchema } = require('../helpers/matchesSchema');
 const { isObject } = require('../helpers/isObject');
 const { yieldError } = require('../helpers/typeErrorMessages');
-const { cloneObject } = require('../helpers/cloneObject');
 
 const matchTargetToSchema = (schema, options) => (target) => {
-  const targetKey = options ? options.targetKey : '_type' ;
+  const targetKey = options ? options.targetKey : '_type';
   const mismatch = matchesSchema(schema, targetKey)(target);
 
   if (!mismatch.success) {
@@ -12,7 +12,7 @@ const matchTargetToSchema = (schema, options) => (target) => {
   }
 
   return Object.keys(target).reduce((obj, key) => {
-    const clone = cloneObject(obj);
+    const clone = cloneDeep(obj);
 
     if (key in schema) {
       clone[key] = isObject(target[key])
