@@ -12,11 +12,12 @@ const typeEnum = createEnum({
   regexp: 'RegExp',
   async: 'Async',
   promise: 'Promise',
+  undefined: 'Undefined',
 });
 
-const assertType = (value, expectedType) => {
+const checkType = (value, expectedType) => {
   const expected = typeEnum[expectedType.toLowerCase()];
   return getType(value) === expected;
 };
 
-module.exports = { assertType, typeEnum };
+module.exports = { checkType, typeEnum };

@@ -1,9 +1,10 @@
 const { getType } = require('./getType');
-const { isFunction } = require('./isFunction');
-const { typeEnum } = require('./assertType');
+const { typeEnum, checkType } = require('./checkType');
 
 const yieldError = (message, shouldThrow) => (...args) => {
-  const messageToYield = isFunction(message) ? message(...args) : message;
+  const messageToYield = checkType(message, 'function')
+    ? message(...args)
+    : message;
   if (shouldThrow) {
     throw new Error(messageToYield);
   }
