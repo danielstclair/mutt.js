@@ -13,6 +13,7 @@ const typeEnum = createEnum({
   async: 'Async',
   promise: 'Promise',
   undefined: 'Undefined',
+  date: 'Date',
 });
 
 const checkType = (value, expectedType) => {

@@ -23,6 +23,10 @@ function getType(val) {
     return 'RegExp';
   }
 
+  if (val instanceof Date) {
+    return 'Date';
+  }
+
   const asStr = val.toString();
 
   if (asStr.startsWith('async')) {
